@@ -5,7 +5,7 @@
  *      Author: yoda
  */
 
-#include "poly_r_8096.h"
+#include "poly_r_8192.h"
 
 poly* create_polynomial() {
 	poly *polynomial = (poly*) calloc(1, sizeof(poly));

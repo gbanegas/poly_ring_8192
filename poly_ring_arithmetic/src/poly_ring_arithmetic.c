@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "poly_r_8096.h"
+#include "poly_r_8192.h"
 
 int main(void) {
 	puts("!!!Starting !!!"); /* prints !!!Hello World!!! */
