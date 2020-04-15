@@ -14,17 +14,7 @@
 #include <stdint.h>
 
 #include "gf_mul.h"
-typedef uint64_t element_p;
-
-/*
- * Elements of R.<x> = GF(2)[X]/(X^n + 1). Represents polynomial
- * (coeffs[0] & 0x1) + X*( coeffs[0] << 0x2) + ...+ X^63*(coeffs[0] & 0x8000000000000000 ) + ... +
- * X^{8096}*(coeffs[])
- */
-typedef struct{
-  element_p coeffs[128];
-} poly;
-
+#include "export.h"
 
 
 extern poly * create_polynomial();

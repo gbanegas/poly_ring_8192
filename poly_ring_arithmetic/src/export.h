@@ -29,6 +29,17 @@
 #define EXPORT_H_
 
 
+#include <stdint-gcc.h>
+
+typedef uint64_t element_p;
+
+
+typedef struct{
+  element_p coeffs[128];
+} poly;
+
+
+
 #ifndef GF2X_HAVE_PCLMUL_SUPPORT
 #define GF2X_HAVE_PCLMUL_SUPPORT 1
 #endif
