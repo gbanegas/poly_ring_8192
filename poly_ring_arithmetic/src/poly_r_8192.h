@@ -11,6 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+
+#include "gf_mul.h"
+typedef uint64_t element_p;
 
 /*
  * Elements of R.<x> = GF(2)[X]/(X^n + 1). Represents polynomial
@@ -18,7 +22,7 @@
  * X^{8096}*(coeffs[])
  */
 typedef struct{
-  unsigned long long coeffs[127];
+  element_p coeffs[128];
 } poly;
 
 
@@ -27,8 +31,18 @@ extern poly * create_polynomial();
 
 extern void set_pos(int pos, poly *polynomial);
 
-extern void print_polynomia(poly *polynomial);
+extern void print_polynomial(poly *polynomial);
 
 extern void flip_pos(int pos, poly *polynomial);
+
+extern void add_poly(poly *result, const poly *p1, const poly *p2);
+
+extern void mul_poly(poly *result, const poly *p1, const poly *p2);
+
+extern void div_poly(poly *result, const poly p1, const poly *p2);
+
+extern unsigned long long  pop_count(const poly *p2);
+
+
 
 #endif /* POLY_R_8096_C_ */

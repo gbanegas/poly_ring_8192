@@ -57,7 +57,7 @@
                                 								
                                 <option id="gnu.c.compiler.option.dialect.std.133626036" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.c99" valueType="enumerated"/>
                                 								
-                                <option id="gnu.c.compiler.option.misc.other.141454522" name="Other flags" superClass="gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -DDEBUG" valueType="string"/>
+                                <option id="gnu.c.compiler.option.misc.other.141454522" name="Other flags" superClass="gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-mpclmul -msse2 -c -fmessage-length=0 -DDEBUG" valueType="string"/>
                                 								
                                 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.940105425" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
                                 							
