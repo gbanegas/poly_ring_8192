@@ -18,9 +18,9 @@ int main(void) {
 	poly *p1 = create_polynomial();
 	poly *p2 = create_polynomial();
 	poly *result = create_polynomial();
+	poly *p3 = create_polynomial();
 
 	set_pos(1, p1);
-
 
 	set_pos(2, p2);
 
@@ -34,6 +34,13 @@ int main(void) {
 
 	printf("result p1*p2: ");
 	print_polynomial(result);
+
+	unsigned long deg_p1 = get_deg(p1);
+	unsigned long deg_p2 = get_deg(p2);
+	unsigned long deg_r = get_deg(result);
+	unsigned long deg_p = get_deg(p3);
+
+	printf("deg_p1: %lu , deg_p2: %lu, deg_r: %lu deg_p:%lu \n", deg_p1, deg_p2, deg_r, deg_p);
 
 	//print_polynomia(pol);
 

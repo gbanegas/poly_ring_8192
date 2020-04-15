@@ -103,6 +103,20 @@ void mul_poly(poly *result, const poly *p1, const poly *p2) {
 
 }
 
+unsigned long get_deg(const poly *p) {
+	unsigned long degree = 8192;
+	while (degree > 0) {
+
+		int idx_block = degree / 64;
+		element_p one = 1;
+		int idx_pos = 64 - ((idx_block * 64) - degree);
+		if(p->coeffs[idx_block] & (one << idx_pos))
+			return degree;
+		degree--;
+	}
+	return 0;
+}
+
 void div_poly(poly *result, const poly p1, const poly *p2) {
 
 }
