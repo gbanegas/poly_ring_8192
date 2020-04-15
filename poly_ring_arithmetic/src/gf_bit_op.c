@@ -30,3 +30,19 @@ void right_bit_shift(const int length, element_p in[]) {
 	in[j] <<= 1;
 
 } // end right_bit_shift
+
+void rotate_bit_right(element_p in[]) /*  equivalent to x * in(x) mod x^P+1 */
+{
+
+	element_p mask, rotated_bit;
+
+	/* NUM_DIGITS_GF2X_MODULUS == 1 + NUM_DIGITS_GF2X_ELEMENT and
+	 * MSb_POSITION_IN_MSB_DIGIT_OF_MODULUS == 0
+	 */
+	mask = ((element_p) 0x1) << (64 - 1);
+	rotated_bit = !!(in[127] & mask);
+	in[127] &= ~mask; /* clear shifted bit */
+	right_bit_shift(128, in);
+
+	in[0] |= rotated_bit;
+} // end rotate_bit_left

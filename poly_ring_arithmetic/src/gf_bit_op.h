@@ -15,6 +15,7 @@
 
 
 #include "export.h"
+void rotate_bit_right(element_p in[]);
 void right_bit_shift(const int length, element_p in[]);
 
 #endif /* GF_BIT_OP_H_ */

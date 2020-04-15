@@ -28,7 +28,7 @@ int main(void) {
 	set_pos(5, p3);
 	set_pos(6, p3);
 	set_pos(7, p3);
-	set_pos(8098, p3);
+	set_pos(8191, p3);
 
 	printf("poly 1: ");
 	print_polynomial(p1);
@@ -52,7 +52,7 @@ int main(void) {
 	printf("deg_p1: %lu , deg_p2: %lu, deg_r: %lu deg_p:%lu \n", deg_p1, deg_p2,
 			deg_r, deg_p);
 
-	right_bit_shift(128, p3->coeffs);
+	rotate_bit_right(p3->coeffs);
 
 	printf("poly 3: ");
 	print_polynomial(p3);
