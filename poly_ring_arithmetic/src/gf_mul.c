@@ -58,6 +58,26 @@ void mul_base_case_inner(unsigned long *c, const unsigned long *a, long na,
 	}
 }
 
+void print_polynomial2(const unsigned long *temp, int size) {
+
+	int idx = 0;
+	unsigned long long one = 1;
+	for (int i = 0; i < size; i++) {
+		for (unsigned long long j = 0; j < 64; j++) {
+			unsigned long long result = (one << j);
+			if (temp[i] & result) {
+				if (idx != 0)
+					printf("x^%d +", idx);
+				else
+					printf("1 +");
+			}
+			idx++;
+		}
+	}
+	printf("\n");
+
+}
+
 void gf_mul_kara(unsigned long *c, const unsigned long *a,
 		const unsigned long *b, long n, unsigned long *stk) {
 	unsigned long t;
@@ -98,6 +118,11 @@ void gf_mul_kara(unsigned long *c, const unsigned long *a,
 
 	gf_mul_kara(c, a, b, n2, stk); /* Low */
 	gf_mul_kara(c2, a1, b1, n2 - d, stk); /* High */
+
+//	print_polynomial2(a, n);
+//	print_polynomial2(a1, n2);
+
+	//print_polynomial2(aa, stk);
 
 	for (j = 0; j < n2 - d; j++) {
 		aa[j] = a[j] ^ a1[j];

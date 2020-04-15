@@ -8,6 +8,7 @@
 #ifndef GF_MUL_H_
 #define GF_MUL_H_
 
+#include <stdio.h>
 #include "impl.h"
 #include "export.h"
 #include "small.h"
