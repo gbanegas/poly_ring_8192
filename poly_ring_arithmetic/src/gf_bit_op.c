@@ -85,7 +85,6 @@ void rotate_bit_left(element_p in[]) /*  equivalent to x * in(x) mod x^P+1 */
 	in[127] |= (rotated_bit << (64 - 1));
 } // end rotate_bit_left
 
-
 static __m256i right_bit_shift_n(__m256i *data, int count) {
 	__m256i innerCarry, carryOut, rotate;
 	innerCarry = _mm256_srli_epi64(*data, 64 - count); // carry outs in bit 0 of each qword
@@ -98,7 +97,7 @@ static __m256i right_bit_shift_n(__m256i *data, int count) {
 }
 __attribute__((optimize("unroll-loops")))
 inline void shift_n_bits_to_right(int count, element_p *in) {
-	for (int i = 0; i < 128; i = i + 4) {
+	for (int i = 0; i < 124; i = i + 4) {
 		__m256i tmp;
 		__m256i a = _mm256_lddqu_si256((__m256i*) &in[i]);
 		__m256i carryOut = right_bit_shift_n(&a, count);
@@ -110,5 +109,9 @@ inline void shift_n_bits_to_right(int count, element_p *in) {
 		_mm256_storeu_si256(((__m256i*) &in[i + 4]), tmp);
 		//printf("i: %d -  i+4: %d\n", i, (i + 4));
 	}
+	__m256i a = _mm256_lddqu_si256((__m256i*) &in[124]);
+	right_bit_shift_n(&a, count);
+
+	_mm256_storeu_si256(((__m256i*) &in[124]), a);
 
 }
