@@ -115,3 +115,48 @@ inline void shift_n_bits_to_right(int count, element_p *in) {
 	_mm256_storeu_si256(((__m256i*) &in[124]), a);
 
 }
+
+
+__attribute__((optimize("unroll-loops")))
+void tmp(unsigned long *in, int count) {
+
+	__m256i tmp;
+	__m256i as[32];
+	__m256i carry[32] = { 0 };
+	int j = 0;
+	for (int i = 0; i < 32; i++) {
+		as[i] = _mm256_lddqu_si256((__m256i*) &in[j]);
+		j = j + 4;
+	}
+	//__m256i a = _mm256_lddqu_si256((__m256i*) &in[i]);
+	carry[0] = right_bit_shift_n(&as[0], count);
+
+	_mm256_storeu_si256(((__m256i*) &in[0]), as[0]);
+	for (int i = 1; i < 32; i++) {
+		carry[i] = right_bit_shift_n(&as[i], count);
+	}
+
+	j = 4;
+	for (int i = 1; i < 32; i++) {
+		tmp = _mm256_or_si256(as[i], carry[i - 1]);
+		_mm256_storeu_si256(((__m256i*) &in[j]), tmp);
+		j = j + 4;
+
+	}
+
+}
+
+
+__attribute__((optimize("unroll-loops")))
+void righ_bit_shift_by_any(unsigned long *in, int count) {
+	int temp = count;
+	int n = temp % 63;
+	tmp(in, n);
+	temp = temp - n;
+	temp = temp / 63;
+	for (int i = 0; i < temp; i++) {
+		tmp(in, 63);
+		//print_polynomial(in);
+	}
+
+}

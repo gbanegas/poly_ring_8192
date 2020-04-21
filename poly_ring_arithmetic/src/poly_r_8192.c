@@ -110,14 +110,26 @@ unsigned long get_deg(const poly *p) {
 		int idx_block = degree / 64;
 		element_p one = 1;
 		int idx_pos = 64 - ((idx_block * 64) - degree);
-		if(p->coeffs[idx_block] & (one << idx_pos))
+		if (p->coeffs[idx_block] & (one << idx_pos))
 			return degree;
 		degree--;
 	}
 	return 0;
 }
 
-void div_poly(poly *result, const poly p1, const poly *p2) {
+void div_poly(poly *quotient, const poly *dividend, const poly *divisor) {
+
+
+	int degree_dividend = get_deg(dividend);
+	int degree_divisor = get_deg(divisor);
+
+	int degree_quotient = degree_dividend - degree_divisor;
+	poly *remainder;
+	//quotient = create_polynomial(degree_quotient);
+	while (degree_dividend >= degree_divisor) {
+
+	}
+	//polynomial_free(dividend);
 
 }
 

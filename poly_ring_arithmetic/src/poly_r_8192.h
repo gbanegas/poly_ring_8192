@@ -29,7 +29,7 @@ extern void add_poly(poly *result, const poly *p1, const poly *p2);
 
 extern void mul_poly(poly *result, const poly *p1, const poly *p2);
 
-extern void div_poly(poly *result, const poly p1, const poly *p2);
+extern void div_poly(poly *result, const poly *p1, const poly *p2);
 
 extern unsigned long get_deg(const poly *p);
 
