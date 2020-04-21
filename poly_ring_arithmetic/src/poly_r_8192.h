@@ -35,7 +35,7 @@ extern void div_poly(poly *quo, poly *re, const poly *dividend, const poly *divi
 
 extern unsigned long get_deg(const poly *p);
 
-extern unsigned long long  pop_count(const poly *p2);
+extern int  pop_count(const poly *p2);
 
 
 

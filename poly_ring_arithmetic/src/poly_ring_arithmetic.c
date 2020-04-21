@@ -56,6 +56,14 @@ int main(void) {
 	printf("rquo: ");
 	print_polynomial(rem);
 
+
+	int result_p1 = pop_count(p1);
+	int result_p2 = pop_count(p2);
+	int result_p3 = pop_count(p3);
+	int result_quo = pop_count(quo);
+
+	printf("p1: %d - p2: %d - p3: %d - quo: %d \n", result_p1, result_p2, result_p3, result_quo);
+
 	/*
 	 unsigned long deg_p1 = get_deg(p1);
 	 unsigned long deg_p2 = get_deg(p2);

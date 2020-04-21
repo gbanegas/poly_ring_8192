@@ -131,7 +131,7 @@ void div_poly(poly *quo, poly *re, const poly *dividend, const poly *divisor) {
 	//	print_polynomial(&temp);
 
 		set_pos(degree_dividend - degree_divisor, quo);
-		print_polynomial(quo);
+		//print_polynomial(quo);
 
 		add_poly(&d_copy, &temp, &d_copy);
 	//	print_polynomial(&d_copy);
@@ -145,9 +145,12 @@ void div_poly(poly *quo, poly *re, const poly *dividend, const poly *divisor) {
 
 }
 
-unsigned long long pop_count(const poly *p) {
-
-	return 0;
+int pop_count(const poly *p) {
+	int result = 0;
+	for(int i = 0; i < 128; i ++){
+		result +=__builtin_popcountl(p->coeffs[i]);
+ 	}
+	return result;
 
 }
 
