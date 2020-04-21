@@ -21,6 +21,10 @@ int main(void) {
 	poly *result = create_polynomial();
 	poly *p3 = create_polynomial();
 
+	poly *quo = create_polynomial();
+
+	poly *rem = create_polynomial();
+
 	set_pos(1, p1);
 
 	set_pos(2, p2);
@@ -44,25 +48,33 @@ int main(void) {
 	printf("result p1*p2: ");
 	print_polynomial(result);
 
-	unsigned long deg_p1 = get_deg(p1);
-	unsigned long deg_p2 = get_deg(p2);
-	unsigned long deg_r = get_deg(result);
-	unsigned long deg_p = get_deg(p3);
+	div_poly(quo, rem, p3, p1);
 
-	printf("deg_p1: %lu , deg_p2: %lu, deg_r: %lu deg_p:%lu \n", deg_p1, deg_p2,
-			deg_r, deg_p);
+	printf("rquo: ");
+	print_polynomial(quo);
 
-	rotate_bit_left(p3->coeffs);
+	printf("rquo: ");
+	print_polynomial(rem);
 
-	printf("poly 3: ");
-	print_polynomial(p3);
+	/*
+	 unsigned long deg_p1 = get_deg(p1);
+	 unsigned long deg_p2 = get_deg(p2);
+	 unsigned long deg_r = get_deg(result);
+	 unsigned long deg_p = get_deg(p3);
 
-	shift_n_bits_to_right(1, p3->coeffs);
+	 printf("deg_p1: %lu , deg_p2: %lu, deg_r: %lu deg_p:%lu \n", deg_p1, deg_p2,
+	 deg_r, deg_p);
 
-	printf("poly 3: ");
-	print_polynomial(p3);
+	 rotate_bit_left(p3->coeffs);
+
+	 printf("poly 3: ");
+	 print_polynomial(p3);
+
+	 shift_n_bits_to_right(1, p3->coeffs);
+
+	 printf("poly 3: ");
+	 print_polynomial(p3);*/
 	//print_polynomia(pol);
-
 	/*set_pos(4096, pol);
 	 set_pos(3, pol);
 	 set_pos(8, pol);

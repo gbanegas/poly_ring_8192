@@ -20,6 +20,6 @@ void right_bit_shift(const int length, element_p in[]);
 void left_bit_shift(const int length, element_p in[]);
 void rotate_bit_left(element_p in[]);
 
-void shift_n_bits_to_right(int amount, element_p *in);
+void righ_bit_shift_by_any(element_p *in, int count);
 
 #endif /* GF_BIT_OP_H_ */

@@ -104,9 +104,8 @@ void mul_poly(poly *result, const poly *p1, const poly *p2) {
 }
 
 unsigned long get_deg(const poly *p) {
-	unsigned long degree = 8192;
+	unsigned long degree = 8191;
 	while (degree > 0) {
-
 		int idx_block = degree / 64;
 		element_p one = 1;
 		int idx_pos = 64 - ((idx_block * 64) - degree);
@@ -117,18 +116,31 @@ unsigned long get_deg(const poly *p) {
 	return 0;
 }
 
-void div_poly(poly *quotient, const poly *dividend, const poly *divisor) {
+void div_poly(poly *quo, poly *re, const poly *dividend, const poly *divisor) {
 
+	unsigned long degree_dividend = get_deg(dividend);
+	unsigned long degree_divisor = get_deg(divisor);
+	poly temp = *divisor;
+	poly d_copy = *dividend;
+	print_polynomial(&d_copy);
 
-	int degree_dividend = get_deg(dividend);
-	int degree_divisor = get_deg(divisor);
-
-	int degree_quotient = degree_dividend - degree_divisor;
-	poly *remainder;
 	//quotient = create_polynomial(degree_quotient);
 	while (degree_dividend >= degree_divisor) {
+		righ_bit_shift_by_any(temp.coeffs, (degree_dividend - degree_divisor));
+
+	//	print_polynomial(&temp);
+
+		set_pos(degree_dividend - degree_divisor, quo);
+		print_polynomial(quo);
+
+		add_poly(&d_copy, &temp, &d_copy);
+	//	print_polynomial(&d_copy);
+		degree_dividend = get_deg(&d_copy);
+
+		temp = *divisor;
 
 	}
+	*re = d_copy;
 	//polynomial_free(dividend);
 
 }

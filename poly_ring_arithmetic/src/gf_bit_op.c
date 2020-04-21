@@ -85,7 +85,7 @@ void rotate_bit_left(element_p in[]) /*  equivalent to x * in(x) mod x^P+1 */
 	in[127] |= (rotated_bit << (64 - 1));
 } // end rotate_bit_left
 
-static __m256i right_bit_shift_n(__m256i *data, int count) {
+ __m256i right_bit_shift_n(__m256i *data, int count) {
 	__m256i innerCarry, carryOut, rotate;
 	innerCarry = _mm256_srli_epi64(*data, 64 - count); // carry outs in bit 0 of each qword
 	rotate = _mm256_permute4x64_epi64(innerCarry, 0x93); // rotate ymm left 64 bits
@@ -148,7 +148,7 @@ void tmp(unsigned long *in, int count) {
 
 
 __attribute__((optimize("unroll-loops")))
-void righ_bit_shift_by_any(unsigned long *in, int count) {
+void righ_bit_shift_by_any(element_p *in, int count) {
 	int temp = count;
 	int n = temp % 63;
 	tmp(in, n);

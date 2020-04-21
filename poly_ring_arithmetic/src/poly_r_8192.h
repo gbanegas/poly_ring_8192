@@ -14,10 +14,12 @@
 #include <stdint.h>
 
 #include "gf_mul.h"
+#include "gf_bit_op.h"
 #include "export.h"
 
 
 extern poly * create_polynomial();
+
 
 extern void set_pos(int pos, poly *polynomial);
 
@@ -29,7 +31,7 @@ extern void add_poly(poly *result, const poly *p1, const poly *p2);
 
 extern void mul_poly(poly *result, const poly *p1, const poly *p2);
 
-extern void div_poly(poly *result, const poly *p1, const poly *p2);
+extern void div_poly(poly *quo, poly *re, const poly *dividend, const poly *divisor);
 
 extern unsigned long get_deg(const poly *p);
 
