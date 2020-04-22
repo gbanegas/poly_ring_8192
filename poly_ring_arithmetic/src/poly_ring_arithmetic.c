@@ -64,6 +64,13 @@ int main(void) {
 
 	printf("p1: %d - p2: %d - p3: %d - quo: %d \n", result_p1, result_p2, result_p3, result_quo);
 
+	free(p1);
+	free(p2);
+	free(p3);
+	free(quo);
+	free(rem);
+	free(result);
+
 	/*
 	 unsigned long deg_p1 = get_deg(p1);
 	 unsigned long deg_p2 = get_deg(p2);

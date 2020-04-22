@@ -71,13 +71,14 @@ int gf_mul_r(unsigned long *c, const unsigned long *a, unsigned long sa,
 	xpool = xxpool;
 
 	if (xpool->stk_size < sp) {
-		void *p = realloc(xpool->stk, sp * sizeof(unsigned long));
+		void *p = realloc(xpool->stk, sp * sizeof(element_p));
 		if (p == NULL) {
 			rc = -1;
 			goto end_of_gf2x_mul_r;
 		}
 		xpool->stk = p;
 		xpool->stk_size = sp;
+		free(p);
 	}
 
 	// Avoid copy in common case
@@ -88,9 +89,10 @@ int gf_mul_r(unsigned long *c, const unsigned long *a, unsigned long sa,
 
 	if (dst && dst != c) {
 		/* Then we have allocated a temp buffer */
-		memcpy(c, dst, sc * sizeof(unsigned long));
+		memcpy(c, dst, sc * sizeof(element_p));
 		free(dst);
 	}
+
 	return rc;
 }
 
@@ -145,6 +147,7 @@ void div_poly(poly *quo, poly *re, const poly *dividend, const poly *divisor) {
 
 }
 
+__attribute__((optimize("unroll-loops")))
 int pop_count(const poly *p) {
 	int result = 0;
 	for(int i = 0; i < 128; i ++){
@@ -174,67 +177,3 @@ void print_polynomial(poly *polynomial) {
 
 }
 
-/*void gf2x_mul_kara(unsigned long *c, const unsigned long *a,
- const unsigned long *b, long n, unsigned long *stk) {
- unsigned long t;
- unsigned long *aa, *bb, *cc;
- long j, d, n2;
-
- assert(c != a);
- assert(c != b);
-
- #if 0
- if (n <= 0)
- {				 if turned on this test shows that calls with n == 0
- do occur (e.g from tunefft, FFT(19683)), but don't
- seem to be harmful if mul_basecase_n just returns.
- printf("\nWarning: n %ld in call to KarMul\n", n);
- fflush(stdout);
- }
- #endif
-
- if (n < 10) {
- gf_mul_basecase(c, a, n, b, n);
- return;
- }
-
- n2 = (n + 1) / 2;  ceil(n/2)
- d = n & 1;  2*n2 - n = 1 if n odd, 0 if n even
- aa = stk;  Size n2
- bb = aa + n2;  Size n2
- cc = bb + n2;  Size n2
-
- stk = cc + n2;  sp(n) = 3*ceil(n/2)) + sp(ceil(n/2))
-
- const unsigned long *a1 = a + n2;  a[n2]
- const unsigned long *b1 = b + n2;  b[n2]
- unsigned long *c1 = c + n2;  c[n2]
- unsigned long *c2 = c1 + n2;  c[2*n2]
- unsigned long *c3 = c2 + n2;  c[3*n2]
-
- gf2x_mul_kara(c, a, b, n2, stk);  Low
- gf2x_mul_kara(c2, a1, b1, n2 - d, stk);  High
-
- for (j = 0; j < n2 - d; j++) {
- aa[j] = a[j] ^ a1[j];
- bb[j] = b[j] ^ b1[j];
- cc[j] = c1[j] ^ c2[j];
- }
- for (; j < n2; j++) {  Only when n odd
- aa[j] = a[j];
- bb[j] = b[j];
- cc[j] = c1[j] ^ c2[j];
- }
-
- gf2x_mul_kara(c1, aa, bb, n2, stk);  Middle
-
- for (j = 0; j < n2 - 2 * d; j++) {
- t = cc[j];
- c1[j] ^= t ^ c[j];
- c2[j] ^= t ^ c3[j];
- }
- for (; j < n2; j++) {  Only when n odd
- c1[j] ^= cc[j] ^ c[j];
- c2[j] ^= cc[j];
- }
- }*/
